@@ -19,15 +19,52 @@ class SetagayakuNewMansionSpider(CrawlSpider):
             return price.replace('\r\n\t\t\t\t\t\t\t', '')
         return price
 
+    def get_min_price(self, min_price):
+        if min_price:
+            try:
+                return int(min_price.replace('\r\n\t\t\t\t\t\t\t', '').replace('億', '').replace('万', '').replace('円', '').replace('台', '').split('～')[0])
+            except:
+                return min_price.replace('\r\n\t\t\t\t\t\t\t', '')
+        return min_price
+    
+    def get_max_price(self, max_price):
+        if max_price:
+            try:
+                return int(max_price.replace('\r\n\t\t\t\t\t\t\t', '').replace('億', '').replace('万', '').replace('円', '').replace('台', '').split('～')[-1])
+            except:
+                return max_price.replace('\r\n\t\t\t\t\t\t\t', '')
+        return max_price
+
     def get_measure(self, measure):
         if measure:
-            return float(measure.replace('m','').replace('\r\n\t\t\t\t\t', ''))
+            return '・'.join(measure).replace('\r\n\t\t\t\t\t', '').replace('・', '').replace('m', '')
         return measure
+    
+    def get_min_measure(self, min_measure):
+        if min_measure:
+            return float('・'.join(min_measure).replace('\r\n\t\t\t\t\t', '').replace('・', '').replace('m', '').split('～')[0])
+        return min_measure
+    
+    def get_max_measure(self, max_measure):
+        if max_measure:
+            return float('・'.join(max_measure).replace('\r\n\t\t\t\t\t', '').replace('・', '').replace('m', '').split('～')[-1])
+        return max_measure
+        
     
     def get_madori(self, madori):
         if madori:
             return madori.replace('\r\n\t\t\t\t\t', '')
         return madori
+    
+    def get_min_madori(self, min_madori):
+        if min_madori:
+            return min_madori.replace('\r\n\t\t\t\t\t', '').split('～')[0]
+        return min_madori
+    
+    def get_max_madori(self, max_madori):
+        if max_madori:
+            return max_madori.replace('\r\n\t\t\t\t\t', '').split('～')[-1]
+        return max_madori
     
     def get_hikiwatashi(self, hikiwatashi):
          if hikiwatashi:
@@ -81,8 +118,14 @@ class SetagayakuNewMansionSpider(CrawlSpider):
                 'name': response.xpath('(//span[@class="section_h1-title"])[1]/text()').get(),
                 # 'category':response.xpath('//li[@class="fl mt5 mr10 pct01"][1]/text()').get(),
                 'price':self.get_price(response.xpath('(//span[@class="overview-txt_emplasis"])[1]/text()').get()),
-                'measure': self.get_measure(response.xpath('(//td[@class="overview_table-body overview_table-body--singleline"])[3]/text()').get()),
+                'min_price': self.get_min_price(response.xpath('(//span[@class="overview-txt_emplasis"])[1]/text()').get()),
+                'max_price': self.get_max_price(response.xpath('(//span[@class="overview-txt_emplasis"])[1]/text()').get()),
+                'measure': self.get_measure(response.xpath('(//td[@class="overview_table-body overview_table-body--singleline"])[3]/text()').getall()),
+                'min_measure':self.get_min_measure(response.xpath('(//td[@class="overview_table-body overview_table-body--singleline"])[3]/text()').getall()),
+                'max_measure':self.get_max_measure(response.xpath('(//td[@class="overview_table-body overview_table-body--singleline"])[3]/text()').getall()),
                 'madori': self.get_madori(response.xpath('(//td[@class="overview_table-body overview_table-body--singleline"])[2]/text()').get()),
+                'min_madori': self.get_min_madori(response.xpath('(//td[@class="overview_table-body overview_table-body--singleline"])[2]/text()').get()),
+                'max_madori': self.get_max_madori(response.xpath('(//td[@class="overview_table-body overview_table-body--singleline"])[2]/text()').get()),
                 'hikiwatashi': self.get_hikiwatashi(response.xpath('(//td[@class="overview_table-body overview_table-body--singleline"])[4]/text()').get()),
                 # 'kanseijiki': self.get_kanseijiki(response.xpath('(//td[@class="w299 bdCell"])[14]/text()').get()),
                 # 'floor': self.get_floor(response.xpath('(//td[@class="w299 bdCell"])[15]/text()').get()),
