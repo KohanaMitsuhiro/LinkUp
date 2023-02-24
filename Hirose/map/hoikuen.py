@@ -28,13 +28,12 @@ st.text("""
 # セレクトボックス
 bland_options = st.sidebar.selectbox(
     "希望の保育園の区分をお選びください。",
-    ["全て", "認可保育園", "認証保育園", "認可外保育施設"])
+    ["認可保育園", "認証保育園", "認可外保育施設"])
 st.sidebar.write("現在の選択:", bland_options)
 
 
 
 # # >>> 全て(all_group) >>>
-
 # # >>> 地図の作成 >>>
 # # 地図の中心の緯度/経度、タイル、初期のズームサイズを指定
 # map = folium.Map(
@@ -60,15 +59,13 @@ st.sidebar.write("現在の選択:", bland_options)
 #         fill= True,
 #         color= 'red'
 #     ).add_to(map)
-
-
-# if bland_options == "全て":
-#     st_folium(map, width=700, height=700)
 # # <<< 全て（all_map) <<<
+
+
 
 # >>> 認可(ninka_group) >>>
 
-# >>> 認可地図の作成 >>>
+# 認可地図の作成
 ninka_map = folium.Map(
     location=[35.608730497916845, 139.64832587827124],
     tiles="OpenStreetMap",
@@ -87,6 +84,7 @@ for i, row in ninka_data.iterrows():
         fill= True,
         color= 'blue'
     ).add_to(ninka_group)
+
 # <<< 認可 (ninka_group)<<<
 
 
@@ -111,6 +109,7 @@ for i, row in ninshou_data.iterrows():
     ).add_to(ninshou_group)
 
 # <<< 認証 (ninshou_group)<<<
+
 
 # >>> 認可外(nikagai_group) >>>
 ninkagai_map = folium.Map(
