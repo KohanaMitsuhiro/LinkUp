@@ -1,0 +1,99 @@
+URL
+
+●新築マンション
+https://suumo.jp/ms/shinchiku/tokyo/sc_setagaya/
+
+●中古マンション
+https://suumo.jp/ms/chuko/tokyo/sc_setagaya/
+
+●新築戸建て
+https://suumo.jp/ikkodate/tokyo/sc_setagaya/
+
+●中古戸建
+https://suumo.jp/chukoikkodate/tokyo/sc_setagaya/
+
+
+次へページネーション
+(//a[contains(text(),"次へ")])[1]
+
+
+物件詳細リンク
+//h2/a/@href
+
+
+
+物件名
+//h1/text()
+
+種別
+//li[@class="fl mt5 mr10 pct01"][1]/text()
+
+
+価格
+(//td[@class="w299 bdCell"])[5]/text()[1]
+
+
+面積
+(//td[@class="w299 bdCell"])[11]/text()[1] 
+
+
+間取り
+(//td[@class="w299 bdCell"])[10]/text()
+
+引き渡し可能時期
+(//td[@class="w299 bdCell"])[13]/text()
+
+完成時期
+(//td[@class="w299 bdCell"])[14]/text()
+
+所在階
+(//td[@class="w299 bdCell"])[15]/text()
+
+構造・階建て
+(//td[@class="w299 bdCell"])[22]/text()
+
+住所
+(//td[@class="w290 bdCell"])[9]/p/text()
+
+交通
+(//td[@class="w290 bdCell"])[10]/div[1]/text()
+
+物件URL
+//h2/a/@href
+
+
+
+●新築マンション
+https://suumo.jp/ms/shinchiku/tokyo/sc_setagaya/
+
+
+
+
+物件詳細リンク
+//h2/a/@href
+
+物件名
+(//span[@class="section_h1-title"])[1]/text()
+
+種別
+
+
+価格
+(//span[@class="overview-txt_emplasis"])[1]/text()
+
+間取り
+(//td[@class="overview_table-body overview_table-body--singleline"])[2]/text()
+
+面積
+(//td[@class="overview_table-body overview_table-body--singleline"])[3]/text()
+
+交通
+(//td[@class="overview_table-body overview_table-body--singleline"])[1]/text()
+
+引き渡し可能時期
+(//td[@class="overview_table-body overview_table-body--singleline"])[4]/text()
+
+住所
+(//div[@class="overview_table-flexitem"])[1]/text()
+
+
